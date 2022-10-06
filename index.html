@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html	PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ja">
+
+<head>
+    <link rel="stylesheet" type="text/css" media="screen" href="style.css" />
+    <script type="text/javascript" src="vendor/zlib.js/bin/deflate.min.js"></script>
+    <script type="text/javascript" src="vendor/qrcodejs/qrcode.min.js"></script>
+</head>
+
+<body>
+    <label for="name">Program Name:</label><input type="text" name="name" id="name" value="PROG0001" maxlength="8" />
+    <br />
+    <textarea id="source" style="width: 512px; height: 256px;">PRINT "ｼﾀｶﾞﾒﾝﾆ ﾅﾆｶｶｲﾃﾐﾃｸﾀﾞｻｲ"
+@1
+GPSET TCHX,TCHY,15
+GOTO @1
+</textarea>
+    <br />
+    <input type="button" id="generate" value="Generate" onclick="generateQRCode()" /><br />
+    <textarea id="result" style="width: 512px; height: 256px;"></textarea><br />
+    <div id="qr" style="width: 512px; height: 512px;"></div>
+    <script type="text/javascript" src="script.js"></script>
+</body>
+
+</html>
