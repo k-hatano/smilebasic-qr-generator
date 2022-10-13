@@ -6,21 +6,20 @@
 <head>
     <link rel="stylesheet" type="text/css" media="screen" href="style.css" />
     <script type="text/javascript" src="vendor/zlib.js/bin/deflate.min.js"></script>
-    <script type="text/javascript" src="vendor/qrcodejs/qrcode.min.js"></script>
+    <script type="text/javascript" src="vendor/qrcode-generator/js/qrcode.js"></script>
+    <script type="text/javascript" src="vendor/js-md5/build/md5.min.js"></script>
 </head>
 
 <body>
-    <label for="name">Program Name:</label><input type="text" name="name" id="name" value="PROG0001" maxlength="8" />
+    <label for="name">Program Name:</label><input type="text" name="name" id="name" value="PROGRAM1" maxlength="8" />
     <br />
-    <textarea id="source" style="width: 512px; height: 256px;">PRINT "ｼﾀｶﾞﾒﾝﾆ ﾅﾆｶｶｲﾃﾐﾃｸﾀﾞｻｲ"
-@1
-GPSET TCHX,TCHY,15
-GOTO @1
-</textarea>
+    <textarea id="source" style="width: 512px; height: 256px;">INPUT "INPUT NUMBER TO QUIT";NUM</textarea>
     <br />
-    <input type="button" id="generate" value="Generate" onclick="generateQRCode()" /><br />
-    <textarea id="result" style="width: 512px; height: 256px;"></textarea><br />
-    <div id="qr" style="width: 512px; height: 512px;"></div>
+    <input type="button" id="generate" value="Generate" onclick="generateQRCodeClicked()" /><br />
+    <br />
+    <div id="qr"></div>
+    <br />
+    <textarea id="result" style="width: 512px; height: 256px; display: none;"></textarea>
     <script type="text/javascript" src="script.js"></script>
 </body>
 

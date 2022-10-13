@@ -1,6 +1,9 @@
-[submodule "vendor/qrcodejs"]
-	path = vendor/qrcodejs
-	url = https://github.com/davidshimjs/qrcodejs.git
 [submodule "vendor/zlib.js"]
 	path = vendor/zlib.js
 	url = https://github.com/imaya/zlib.js.git
+[submodule "vendor/qrcode-generator"]
+	path = vendor/qrcode-generator
+	url = https://github.com/kazuhikoarase/qrcode-generator.git
+[submodule "vendor/js-md5"]
+	path = vendor/js-md5
+	url = https://github.com/emn178/js-md5.git
