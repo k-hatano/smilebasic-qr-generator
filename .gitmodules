@@ -7,3 +7,6 @@
 [submodule "vendor/js-md5"]
 	path = vendor/js-md5
 	url = https://github.com/emn178/js-md5.git
+[submodule "vendor/encoding.js"]
+	path = vendor/encoding.js
+	url = https://github.com/polygonplanet/encoding.js.git
