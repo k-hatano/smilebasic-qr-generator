@@ -1,4 +1,6 @@
 
+const LENGTH_PER_PAGE = 512;
+
 function generateQRCodeClicked() {
     let programName = document.getElementById('name').value;
     let source = document.getElementById('source').value.replace(/\n/g, "\r");
@@ -6,13 +8,21 @@ function generateQRCodeClicked() {
     
     document.getElementById('result').value = dataForQRCode;
     
-    let qr = qrcode(0, 'H');
-    qr.addData(dataForQRCode);
-    qr.make();
-    document.getElementById('qr').innerHTML = qr.createImgTag(4);
+    let qrImgTags = '';
+    document.getElementById('qr').innerHTML = '';
+    for (let i = 0; i < dataForQRCode.length; i++) {
+        let qr = qrcode(0, 'H');
+        qr.addData(dataForQRCode[i]);
+        qr.make();
+        qrImgTags += qr.createImgTag(4);
+    }
+    document.getElementById('qr').innerHTML = qrImgTags;
 }
 
 function generateDataForQRCode(programName, utfSource) {
+    let result = [];
+    let pageCount = 0;
+
     let sjisSource = Encoding.convert(Encoding.stringToCode(utfSource), {
       to: 'SJIS',
       from: 'UNICODE'
@@ -37,16 +47,25 @@ function generateDataForQRCode(programName, utfSource) {
     rprgSource += leBytesForNum(petcSource.length);
     rprgSource += petcSourceCompressed;
 
-    let hash = md5(stringToByteArray(rprgSource));
+    let wholeHash = md5(stringToByteArray(rprgSource));
 
-    let partSource = "PT";
-    partSource += String.fromCharCode(0x01);
-    partSource += String.fromCharCode(0x01);
-    partSource += md5HashToBytes(hash);
-    partSource += md5HashToBytes(hash);
-    partSource += rprgSource;
+    pageCount = Math.ceil(rprgSource.length / LENGTH_PER_PAGE);
 
-    return partSource.substring(0, 630);
+    for (let i = 0; i < pageCount; i++) {
+        let pageRprgSource = rprgSource.substring(i * LENGTH_PER_PAGE, (i + 1) * LENGTH_PER_PAGE);
+        let pageHash = md5(stringToByteArray(pageRprgSource));
+ 
+        let partSource = "PT";
+        partSource += String.fromCharCode(i + 1);
+        partSource += String.fromCharCode(pageCount);
+        partSource += md5HashToBytes(wholeHash);
+        partSource += md5HashToBytes(pageHash);
+        partSource += pageRprgSource;
+
+        result.push(partSource);
+    }
+
+    return result;
 }
 
 /* Utils */
